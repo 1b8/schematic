@@ -1,0 +1,22 @@
+{
+  "name": "schematic",
+  "version": "0.0.0",
+  "description": "Read MCEdit/WorldEdit schematics",
+  "main": "index.js",
+  "keywords": [
+    "minecraft"
+  ],
+  "bugs": "https://github.com/1b8/schematic/issues",
+  "license": "MIT",
+  "author": {
+    "name": "1b8"
+  },
+  "repository": "1b8/schematic",
+  "dependencies": {
+    "minecraft-data": "^0.14.0",
+    "prismarine-block": "^0.1.0",
+    "prismarine-entity": "^0.1.0",
+    "prismarine-nbt": "0.0.1",
+    "vec3": "^0.1.3"
+  }
+}
