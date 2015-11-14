@@ -5,6 +5,20 @@ var fs = require('fs'),
 module.exports = function (version) {
   var Block = require('prismarine-block')(version);
 
+  function Schematic(raw) {
+    this.raw = raw;
+    this.width = raw.Width.value;
+    this.height = raw.Height.value;
+    this.length = raw.Length.value;
+  }
+
+  Schematic.prototype.blockAt = function (x, y, z) {
+    var addr = (y * this.length + z) * this.width + x;
+    var block = new Block(this.raw.Blocks.value[addr], null, this.raw.Data.value[addr]);
+    block.position = vec3(x, y, z);
+    return block;
+  };
+
   return {
     read: function (path, callback) {
       if (!callback) callback = function (err) {
@@ -21,18 +35,4 @@ module.exports = function (version) {
       });
     }
   };
-};
-
-function Schematic(raw) {
-  this.raw = raw;
-  this.width = raw.Width.value;
-  this.height = raw.Height.value;
-  this.length = raw.Length.value;
-}
-
-Schematic.prototype.blockAt = function (x, y, z) {
-  var addr = (y * this.length + z) * this.width + x;
-  var block = new Block(this.raw.Blocks.value[addr], null, this.raw.Data.value[addr]);
-  block.position = vec3(x, y, z);
-  return block;
 };
