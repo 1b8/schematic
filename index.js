@@ -1,11 +1,11 @@
 var fs = require('fs');
-var util = require('util');
 var nbt = require('prismarine-nbt');
 var vec3 = require('vec3');
 
 module.exports = function (version) {
-  var Block = require('prismarine-block')(version);
-  var mcData = require('minecraft-data')(version);
+  var Block = require('./lib/block')(version);
+  var BlockEntity = require('./lib/block-entity')(version);
+  var block = require('./lib/pos')(version).block;
 
   Schematic.read = function (path, callback) {
     if (!callback) callback = function (err) {
@@ -33,23 +33,31 @@ module.exports = function (version) {
 
   function Schematic(raw) {
     var entities = raw.Entities.value.value;
+    var blockEntities = raw.TileEntities.value.value;
 
     this.raw = raw;
     this.width = raw.Width.value;
     this.height = raw.Height.value;
     this.length = raw.Length.value;
-
     this.entities = [];
-    for (var i = 0; i < entities.length; i++) {
+    this.blockEntities = [];
+    for (var i = 0; i < entities.length; i++)
       this.entities.push(new Entity(entities[i]));
+    for (i = 0; i < blockEntities.length; i++) {
+      this.blockEntities.push(new BlockEntity(raw, blockEntities[i]));
     }
   }
 
   Schematic.prototype.blockAt = function (x, y, z) {
-    var addr = (y * this.length + z) * this.width + x;
-    var block = new Block(this.raw.Blocks.value[addr], null, this.raw.Data.value[addr]);
-    block.position = vec3(x, y, z);
-    return block;
+    var vec = vec3(x, y, z);
+
+    // Check if it's a block entity
+    var blockEntity;
+    for (var i = 0; i < this.blockEntities.length; i++) {
+      blockEntity = this.blockEntities[i];
+      if (blockEntity.position.equals(vec)) return blockEntity;
+    }
+    return block(this.raw, pos);
   };
 
   return Schematic;
