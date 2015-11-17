@@ -18,42 +18,50 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Schematic
+# Classes
+
+## Entity
+
+### 
+
+## BlockEntity
+
+## Schematic
 `Schematic` is the main class; `require('schematic')(version)` returns this.
 
-## Static functions
+### Static functions
 
-### Schematic.parse(data, callback)
+#### Schematic.parse(data, callback)
 Read a `Buffer` and execute the callback with these args:
 * `err` - Any error
 * `data` - The parsed `Schematic` object
 
-## Instance properties
+### Instance properties
 
-### schematic.raw
+#### schematic.raw
 'raw' schematic object, returned directly from prismarine-nbt.
 
-### schematic.width
+#### schematic.width
 Size along the x axis.
 
-### schematic.height
+#### schematic.height
 Size along the y axis.
 
-### schematic.length
+#### schematic.length
 Size along the z axis.
 
-### schematic.entities
+#### schematic.entities
 `Array` of entities in the schematic.
-TODO: Entity class documentation
+See [Entity](#entity).
 
-### schematic.blockEntities
+#### schematic.blockEntities
 `Array` of block entities in the schematic (not intended for direct use;
 `schematic.blockAt()` will return a block entity if there is a block entity at
 the specified position).
-TODO: BlockEntity class documentation
+See [BlockEntity](#blockentity).
 
-## Methods
+### Methods
 
-### schematic.blockAt(x, y, z)
+#### schematic.blockAt(x, y, z)
 Returns the block at the `x`, `y`, and `z` co-ordinates.
 See [prismarine-block](https://github.com/PrismarineJS/prismarine-block).

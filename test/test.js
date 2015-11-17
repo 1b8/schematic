@@ -8,7 +8,7 @@ fs.readFile('test1.schematic', function (err, data) {
     if (err) throw err;
 
     l('Hello');
-    l(schem.blockEntities[0]);
+    l(schem.blockAt(0,0,0).digTime(42));
     // TODO tests
   });
 });

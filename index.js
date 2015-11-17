@@ -41,12 +41,15 @@ module.exports = function (version) {
       blockEntity = this.blockEntities[i];
       if (blockEntity.position.equals(pos)) return blockEntity;
     }
-    return this._blockAt(pos);
+
+    var args = this._blockArgs(pos);
+    return new Block(args[0], args[1], args[2]);
   };
 
-  Schematic.prototype._blockAt = function (pos) {
+  // Returns the arguments to pass into new Block
+  Schematic.prototype._blockArgs = function (pos) {
     var index = (pos.y * this.length + pos.z) * this.width + pos.x;
-    return new Block(this._.Blocks.value[index], this._.Data.value[index], pos);
+    return [this._.Blocks.value[index], this._.Data.value[index], pos];
   };
 
   return Schematic;

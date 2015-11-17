@@ -11,5 +11,5 @@ Schematic.readFile('doo.schematic', function (err, data) {
 });
 ```
 
-### [Documentation](doc/api.md)
-### [Example](doc/examples.js)
+### [Documentation](https://github.com/1b8/schematic/blob/master/doc/api.md)
+### [Example](https://github.com/1b8/schematic/blob/master/doc/examples.js)
