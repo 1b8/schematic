@@ -1,15 +1,20 @@
 // Example
 
+var fs = require('fs');
 var Schematic = require('schematic')('1.8');
 
-Schematic.readFile('../test/test1.schematic', function (err, data) {
+fs.readFile('../test/test1.schematic', function (err, data) {
   if (err) throw err;
 
-  // Entities
-  console.log(data.entities);
+  Schematic.parse(data, function (err, schem) {
+    if (err) throw err;
 
-  // Getting blocks
-  console.log(data.blockAt(0, 0, 0));
+    // Entities
+    console.log(data.entities);
 
-  // TODO more stuff
+    // Getting blocks
+    console.log(data.blockAt(0, 0, 0));
+
+    // TODO more stuff
+  });
 });

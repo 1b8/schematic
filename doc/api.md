@@ -23,15 +23,10 @@
 
 ## Static functions
 
-### Schematic.read(data, callback)
+### Schematic.parse(data, callback)
 Read a `Buffer` and execute the callback with these args:
 * `err` - Any error
 * `data` - The parsed `Schematic` object
-
-### Schematic.readFile(path, callback)
-Parse a file (`path` is absolute, or relative from the current working directory)
-* `path` - The path to get the file from (absolute, or relative from [cwd](https://nodejs.org/api/process.html#process_process_cwd)).
-* `callback` - See [`Schematic.read`](#schematicread)
 
 ## Instance properties
 
@@ -48,14 +43,17 @@ Size along the y axis.
 Size along the z axis.
 
 ### schematic.entities
-Array of entities in the schematic
+`Array` of entities in the schematic.
+TODO: Entity class documentation
 
 ### schematic.blockEntities
-Array of block entities in the schematic (not intended for direct use);
+`Array` of block entities in the schematic (not intended for direct use;
 `schematic.blockAt()` will return a block entity if there is a block entity at
-the specified position.
+the specified position).
+TODO: BlockEntity class documentation
 
 ## Methods
 
 ### schematic.blockAt(x, y, z)
 Returns the block at the `x`, `y`, and `z` co-ordinates.
+See [prismarine-block](https://github.com/PrismarineJS/prismarine-block).
