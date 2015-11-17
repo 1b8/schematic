@@ -5,17 +5,17 @@ Read Minecraft MCEdit/WorldEdit schematics.
 # Usage
 
 ```js
-var schematic = require('schematic')('1.8');
+var Schematic = require('schematic')('1.8');
 
-schematic.read('doo.schematic', function (err, data) {
+Schematic.readFile('doo.schematic', function (err, data) {
   if (err) throw err;
   console.log(data.blockAt(0, 0, 0));
 });
 ```
 
 # Documentation
-
-## Functions
+TODO
+<!--## Functions
 ### schematic`.read(path, callback)`
 
 `path` - path to the schematic, either absolute, or relative from the main module of your program
@@ -47,3 +47,4 @@ The class of the second argument to the callback
 
 Get the block at the x, y, and z co-ordinates of the schematic.
 Uses [prismarine-block](https://github.com/PrismarineJS/prismarine-block#api).
+-->

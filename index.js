@@ -9,19 +9,20 @@ module.exports = function (version) {
 
   class Schematic {
     constructor(raw) {
-      var entities = raw.Entities.value.value;
-      var blockEntities = raw.TileEntities.value.value;
+      this._ = raw.value.value;
+      var entities = this._.Entities.value.value;
+      var blockEntities = this._.TileEntities.value.value;
 
       this.raw = raw;
-      this.width = raw.Width.value;
-      this.height = raw.Height.value;
-      this.length = raw.Length.value;
+      this.width = this._.Width.value;
+      this.height = this._.Height.value;
+      this.length = this._.Length.value;
       this.entities = [];
       this.blockEntities = [];
       for (var i = 0; i < entities.length; i++)
         this.entities.push(new Entity(entities[i]));
       for (i = 0; i < blockEntities.length; i++) {
-        this.blockEntities.push(new BlockEntity(raw, blockEntities[i]));
+        this.blockEntities.push(new BlockEntity(this._, blockEntities[i]));
       }
     }
 
@@ -34,7 +35,7 @@ module.exports = function (version) {
         blockEntity = this.blockEntities[i];
         if (blockEntity.position.equals(vec)) return blockEntity;
       }
-      return block(this.raw, pos);
+      return block(this._, pos);
     }
 
     static read(data, callback) {
