@@ -3,11 +3,13 @@
 Read Minecraft MCEdit/WorldEdit schematics.
 
 ```js
+var fs = require('fs');
 var Schematic = require('schematic')('1.8');
 
-Schematic.readFile('doo.schematic', function (err, data) {
-  if (err) throw err;
-  console.log(data.blockAt(0, 0, 0));
+fs.readFile('test/test1.schematic', function (err, data) {
+  Schematic.parse(data, function (err, schem) {
+    console.log(schem.getBlock(0, 0, 0));
+  });
 });
 ```
 

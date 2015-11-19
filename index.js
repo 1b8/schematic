@@ -4,6 +4,7 @@ var vec3 = require('vec3');
 module.exports = function (version) {
   var Block = require('./lib/block')(version);
   var BlockEntity = require('./lib/block-entity')(version);
+  var Entity = require('./lib/entity');
 
   Schematic.parse = function (data, callback) {
     if (!callback) callback = function (err) {
@@ -32,8 +33,8 @@ module.exports = function (version) {
       this.blockEntities.push(new BlockEntity(this, blockEntities[i]));
   }
 
-  Schematic.prototype.blockAt = function (x, y, z) {
-    var pos = vec3(x, y, z);
+  Schematic.prototype.getBlock = function (x, y, z) {
+    var pos = typeof x === 'number' ? vec3(x, y, z) : x;
 
     // Check if it's a block entity
     var blockEntity;

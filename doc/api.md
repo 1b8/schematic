@@ -20,12 +20,6 @@
 
 # Classes
 
-## Entity
-
-### 
-
-## BlockEntity
-
 ## Schematic
 `Schematic` is the main class; `require('schematic')(version)` returns this.
 
@@ -62,6 +56,205 @@ See [BlockEntity](#blockentity).
 
 ### Methods
 
-#### schematic.blockAt(x, y, z)
+#### schematic.getBlock(x, y, z)
+Arguments can either be three numbers or one Vec3 instance.
 Returns the block at the `x`, `y`, and `z` co-ordinates.
 See [prismarine-block](https://github.com/PrismarineJS/prismarine-block).
+
+## Entity
+
+### entity.dimension
+`"nether"`, `"overworld"`, or `"end"`.
+
+### entity.raw
+Raw data
+
+### entity.id
+The name of the entity, such as `"Zombie"`, or `"EntityHorse"`.
+
+### entity.position
+[`Vec3`](https://github.com/andrewrk/node-vec3), the position of the entity.
+
+### entity.velocity
+[`Vec3`](https://github.com/andrewrk/node-vec3), the speed at which the entity
+is moving, in blocks per tick.
+
+### entity.yaw
+
+### entity.pitch
+
+### entity.fallDistance
+The amount of distance the entity has fallen, or 0 if the entity is not falling.
+
+### entity.fireTicks
+The number of ticks until the entity stops being on fire.
+If negative, how many ticks while standing in fire for the entity to start burning.
+
+### entity.air
+The number of ticks while underwater until the entity starts drowning.
+
+### entity.onGround
+Boolean.
+
+### entity.invulnerable
+Boolean.
+
+### entity.portalCooldown
+Number of ticks until the entity can be teleported through a portal.
+
+### entity.uuid
+The entity's UUID. Looks like:
+```json
+[
+  [
+    739277774,
+    -1808448075
+  ],
+  [
+    -1817433807,
+    1980514233
+  ]
+]
+```
+
+### entity.customName
+`CustomName` of the entity, or an empty string.
+
+### entity.customNameVisible
+Boolean.
+
+### entity.silent
+Boolean.
+
+### entity.rider
+1.9 only, another `Entity`.
+
+### entity.glowing
+(1.9 effects) Boolean.
+
+### entity.nbt
+Extra data about the entity.
+
+### entity.commandStats
+#### entity.commandStats.successCountObjective
+#### entity.commandStats.successCountName
+#### entity.commandStats.affectedBlocksObjective
+#### entity.commandStats.affectedBlocksName
+#### entity.commandStats.affectedEntitiesObjective
+#### entity.commandStats.affectedEntitiesName
+#### entity.commandStats.affectedItemsObjective
+#### entity.commandStats.affectedItemsName
+#### entity.commandStats.queryResultObjective
+#### entity.commandStats.queryResultName
+
+## BlockEntity
+
+Inherits from [prismarine-block](https://github.com/prismarinejs/prismarine-block)
+
+### blockEntity.raw
+
+### Container
+
+#### blockEntity.customName
+Custom name of this container. May not exist, or may exist and be empty.
+
+#### blockEntity.lockKey
+If set, a player must hold an item with this string as its name to open the container.
+
+#### blockEntity.items
+`Array` of [prismarine-item](https://github.com/prismarinejs/prismarine-item)s,
+EXCEPT `item.nbt` is an `Object` instead of a `Buffer`.
+
+#### blockEntity
+
+### Banner
+
+#### blockEntity.background
+#### blockEntity.patterns
+Looks like:
+```json
+{
+  "color": 4,
+  "pattern": "Border"
+}
+```
+
+### Beacon
+
+#### blockEntity.lockKey
+#### blockEntity.levels
+Number of pyramid levels.
+
+#### blockEntity.powers
+##### blockEntity.powers.primary
+##### blockEntity.powers.secondary
+
+### Brewing stand
+Container.
+#### blockEntity.brewTime
+#### blockEntity.fuel
+Added in 1.9.
+
+### Chest
+Container.
+#### blockEntity.lootTable
+Added in 1.9.
+#### blockEntity.lootTableSeed
+Added in 1.9.
+
+### Redstone Comparator
+#### blockEntity.outputSignal
+
+### Command Block
+#### blockEntity.customName
+#### blockEntity.lockKey
+#### blockEntity.commandStats
+See [`entity.commandStats`](#entitycommandstats)
+#### blockEntity.command
+The command the block will execute.
+#### blockEntity.successCount
+#### blockEntity.trackOutput
+Boolean.
+#### blockEntity.powered
+Added in 1.9.
+#### blockEntity.auto
+Added in 1.9.
+
+### Dropper
+Container.
+
+### Enchantment Table
+#### blockEntity.customName
+
+### End Gateway
+Added in 1.9.
+#### blockEntity.age
+#### blockEntity.exactTeleport
+Boolean.
+#### blockEntity.exitPortal
+Vec3.
+
+### Flower Pot
+#### blockEntity.flower
+Block.
+
+### Furnace
+Container.
+#### blockEntity.burnTimeLeft
+In ticks.
+#### blockEntity.cookTime
+Time it's been cooking for, in ticks.
+#### blockEntity.cookTimeTotal
+Time it will take to cook, in ticks.
+
+### Hopper
+Container.
+#### blockEntity.transferCooldown
+
+### Note block
+#### blockEntity.note
+Pitch, integer.
+#### blockEntity.powered
+Added in 1.9.
+
+TODO: More block entity types.
