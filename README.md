@@ -1,5 +1,7 @@
 # schematic
 
+[![NPM version](https://img.shields.io/npm/v/mc-schematic.svg)](http://npmjs.com/package/mc-schematic)
+
 Read Minecraft MCEdit/WorldEdit schematics.
 
 ```js

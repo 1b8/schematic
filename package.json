@@ -1,10 +1,12 @@
 {
-  "name": "schematic",
-  "version": "0.0.0",
+  "name": "mc-schematic",
+  "version": "1.0.0",
   "description": "Read MCEdit/WorldEdit schematics",
   "main": "index.js",
   "keywords": [
-    "minecraft"
+    "minecraft",
+    "nbt",
+    "worldedit"
   ],
   "bugs": "https://github.com/1b8/schematic/issues",
   "license": "MIT",
