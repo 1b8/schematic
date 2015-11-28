@@ -8,7 +8,9 @@ describe('schematic', function () {
   var schem;
 
   before(function (done) {
-    fs.readFile(__dirname + '/test1.schematic', function (err, data) {
+    var num = ~~(Math.random() * 3) + 1;
+    console.log('Testing schematic ' + num);
+    fs.readFile(__dirname + '/test' + num + '.schematic', function (err, data) {
       if (err) throw err;
 
       Schematic.parse(data, function (err, _schem) {
@@ -56,10 +58,36 @@ describe('schematic', function () {
       assert.strictEqual(b.type, 5);
       assert.strictEqual(b.metadata, 2);
     });
+    it('corrects block.position', function () {
+      schem.setBlock(pos, 5, 2);
+      var b = g();
+      assert.deepEqual(b.position, pos);
+    });
+    it('clones block.position', function () {
+      schem.setBlock(pos, 5);
+      var b = g();
+      pos.translate(2, 3, 0);
+      assert.notDeepEqual(pos, b.position);
+    });
 
     function g() {
       return schem.getBlock(pos);
     }
   });
 
+  describe('forEachBlock', function () {
+    it('block.position is normally correct', function () {
+      schem.forEachBlock(function (block, pos) {
+        var gotBlock = schem.getBlock(pos);
+        if (gotBlock === null) return;
+        assert.strictEqual(block, gotBlock);
+      });
+    });
+    it('ends when the callback returns true (and starts with 0,0,0)', function () {
+      schem.forEachBlock(function (block, pos) {
+        assert(pos.equals(new Vec3(0,0,0)));
+        return true;
+      });
+    });
+  });
 });

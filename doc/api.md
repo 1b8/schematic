@@ -130,6 +130,8 @@ Read a `Buffer` and execute the callback with these args:
 
 #### schematic.width
 Size along the x axis.
+<!-- Note: Modifying `width`, `height`, or `length` should, for all intents and
+purposes, have the same effect as modifying the `length` property of an array. -->
 
 #### schematic.height
 Size along the y axis.
@@ -140,6 +142,12 @@ Size along the z axis.
 #### schematic.entities
 `Array` of entities in the schematic.
 See [Entity](#entity).
+
+<!--
+#### schematic.blocks
+A three-dimensional array used to store the parsed blocks. You should not modify
+this; instead use the `.getBlock()` and `.setBlock()` methods.
+-->
 
 ### Methods
 
@@ -168,7 +176,17 @@ schematic.setBlock(5, 5, 5, 35, 14);
 Used internally by `.setBlock()`. `block` is a
 [prismarine-block](https://github.com/PrismarineJS/prismarine-block).
 Calling this method with a non-prismarine-block
-as `block` may have unexpected consequences.
+as `block` may have unexpected consequences. **THE `position` PROPERTY OF
+THE BLOCK WILL REMAIN AS YOU PASS IT, UNLIKE WITH `.setBlock()`, WHICH WILL
+CLONE AND UPDATE THE POSITION.**
+
+#### schematic.forEachBlock(callback : function(block : Block, pos : Vec3))
+Loop through every block in the schematic, calling `callback` for each.
+If `callback` returns `true`, it will stop looping. **MODIFYING `width`,
+`height`, or `length` in the callback may have unexpected consequences...**
+```js
+pos.equals(block.position) === true // (unless you modified block.position...)
+```
 
 ## Entity
 

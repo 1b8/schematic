@@ -15,8 +15,11 @@ fs.readFile('test/test1.schematic', function (err, data) {
 });
 ```
 
-If you have any problems or questions, please
-[create an issue](https://github.com/1b8/schematic/issues).
+If you have any problems, questions, or ideas, please
+[file an issue](https://github.com/1b8/schematic/issues).
+
+Contributions/bugfixes are welcome in the form of
+[pull requests](https://github.com/1b8/schematic/pulls).
 
 ### Installation
 ```
