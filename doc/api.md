@@ -101,6 +101,16 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+Note: functions are displayed in this format:
+```
+functionName(argName : Type | OtherType, functionArg : function(thing : string)[, otherArg : boolean])
+```
+where `functionName` is a function that takes 1 or 3 arguments, and:
+- the first argument is called `argName` and is an instance of either `Type` or
+`OtherType`
+- the second argument is called `functionArg`, and is a function...
+- the third argument is optional, called `otherArg`, and a boolean.
+
 # Classes
 
 ## Schematic
@@ -108,7 +118,7 @@
 
 ### Static functions
 
-#### Schematic.parse(data, callback)
+#### Schematic.parse(data : Buffer, callback : function(error : Error | null, data : Schematic))
 Read a `Buffer` and execute the callback with these args:
 * `err` - Any error
 * `data` - The parsed `Schematic` object
@@ -131,18 +141,34 @@ Size along the z axis.
 `Array` of entities in the schematic.
 See [Entity](#entity).
 
-#### schematic.blockEntities
-`Array` of block entities in the schematic (not intended for direct use;
-`schematic.blockAt()` will return a block entity if there is a block entity at
-the specified position).
-See [BlockEntity](#blockentity).
-
 ### Methods
 
-#### schematic.getBlock(x, y, z)
+#### schematic.getBlock(pos : Vec3)
+#### schematic.getBlock(x, y, z : number)
 Arguments can either be three numbers or one Vec3 instance.
 Returns the block at the `x`, `y`, and `z` co-ordinates.
 See [prismarine-block](https://github.com/PrismarineJS/prismarine-block).
+
+#### schematic.setBlock(pos : Vec3, id, data=0 : number)
+#### schematic.setBlock(x, y, z, id, data=0 : number)
+Set the block at (`x`, `y`, `z`) or `pos`. **This does not modify the file!**
+- `id` - block id (1 for stone, etc.)
+- `data` - data value, defaults to `0`.
+
+Example usage to set the block at (`5`, `5`, `5`) to red wool
+(wool is id `35`, red is data value `14`):
+```js
+var v = require('vec3'); // https://npmjs.com/package/vec3
+schematic.setBlock(v(5, 5, 5), 35, 14);
+// OR
+schematic.setBlock(5, 5, 5, 35, 14);
+```
+
+#### schematic.\_setBlock(pos : Vec3, block : Block)
+Used internally by `.setBlock()`. `block` is a
+[prismarine-block](https://github.com/PrismarineJS/prismarine-block).
+Calling this method with a non-prismarine-block
+as `block` may have unexpected consequences.
 
 ## Entity
 

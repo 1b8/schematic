@@ -15,5 +15,18 @@ fs.readFile('test/test1.schematic', function (err, data) {
 });
 ```
 
+If you have any problems or questions, please
+[create an issue](https://github.com/1b8/schematic/issues).
+
+### Installation
+```
+npm install --save mc-schematic
+```
+
 ### [Documentation](https://github.com/1b8/schematic/blob/master/doc/api.md)
 ### [Example](https://github.com/1b8/schematic/blob/master/doc/examples.js)
+
+### TODO
+`schem.updateRaw()` + entities
+`schem.write()`
+Write more tests

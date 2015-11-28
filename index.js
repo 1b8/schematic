@@ -2,9 +2,9 @@ var nbt = require('prismarine-nbt');
 var vec3 = require('vec3');
 
 module.exports = function (version) {
-  var Block = require('./lib/block')(version);
-  var BlockEntity = require('./lib/block-entity')(version);
+  var newBlock = require('./lib/block')(version);
   var Entity = require('./lib/entity');
+  Schematic.block = newBlock;
 
   Schematic.parse = function (data, callback) {
     if (!callback) callback = function (err) {
@@ -19,39 +19,123 @@ module.exports = function (version) {
 
   function Schematic(raw) {
     this._ = raw.value.value;
-    var entities = this._.Entities.value.value;
-    var blockEntities = this._.TileEntities.value.value;
     this.raw = raw;
+
+    var entities = this._.Entities.value.value;
+    var blocks = this._.Blocks.value;
+    var blockEntities = this._.TileEntities.value.value;
+
     this.width = this._.Width.value;
     this.height = this._.Height.value;
     this.length = this._.Length.value;
+
     this.entities = [];
     this.blockEntities = [];
+    this.blocks = [];
+
     for (var i = 0; i < entities.length; i++)
-    this.entities.push(new Entity(entities[i]));
-    for (i = 0; i < blockEntities.length; i++)
-      this.blockEntities.push(new BlockEntity(this, blockEntities[i]));
+      this.entities.push(new Entity(entities[i]));
+
+    // Parse blocks
+    var pos = vec3(), j, blockEntity;
+    for (i = 0; i < blocks.length; i++) {
+
+      blockEntities.some(function (block) {
+        if (pos.equals(vec3(block.x.value, block.y.value, block.z.value))) {
+          blockEntity = block;
+          return true;
+        }
+      });
+
+      var block = newBlock(blocks[i],
+        this._.Data.value[i], pos.clone(), blockEntity);
+
+      if (blockEntity) this.blockEntities.push(block);
+
+      this._setBlock(pos, block);
+
+      // Increment position
+      if (pos.x < (this.width - 1))
+        pos.x++;
+      else if (pos.y < (this.height - 1)) {
+        pos.x = 0;
+        pos.y++;
+      } else {
+        pos.x = 0;
+        pos.y = 0;
+        pos.z++;
+      }
+    }
   }
 
   Schematic.prototype.getBlock = function (x, y, z) {
-    var pos = typeof x === 'number' ? vec3(x, y, z) : x;
-
-    // Check if it's a block entity
-    var blockEntity;
-    for (var i = 0; i < this.blockEntities.length; i++) {
-      blockEntity = this.blockEntities[i];
-      if (blockEntity.position.equals(pos)) return blockEntity;
+    if (typeof x === 'object') {
+      // x is Vec3
+      y = x.y;
+      z = x.z;
+      x = x.x;
     }
 
-    var args = this._blockArgs(pos);
-    return new Block(args[0], args[1], args[2]);
+    // TODO Maybe throw error instead of returning null?
+
+    // if [x] & [y] exist but not z, will be undefined, return null instead.
+    try {return this.blocks[x][y][z] || null;}
+    // if either [x] or [y] doesn't exist, catch
+    catch (err) {return null;}
   };
 
-  // Returns the arguments to pass into new Block
-  Schematic.prototype._blockArgs = function (pos) {
-    var index = (pos.y * this.length + pos.z) * this.width + pos.x;
-    return [this._.Blocks.value[index], this._.Data.value[index], pos];
+  Schematic.prototype.updateRaw = function () {
+    var ids = this._.Blocks.value.value = [];
+    var data = this._.Data.value.value = [];
+    var blockEntities = this._.TileEntities.value.value = [];
+
+    var empty = [];
+    var currArr = this.blocks, block;
+    for (var x = 0; x < this.width; x++) {
+      currArr = currArr[x] ? currArr[x] : empty;
+      for (var y = 0; y < this.height; y++) {
+        currArr = currArr[y] ? currArr[y] : empty;
+        for (var z = 0; z < this.length; z++) {
+          block = currArr[z];
+          if (block) {
+            ids.push(block.id);
+            data.push(block.metadata);
+            if (block.blockEntityType)
+              blockEntities.push(block.updateRaw());
+          } else {
+            ids.push(0);
+            data.push(0);
+          }
+        }
+      }
+    }
+
+    // TODO entities
+  };
+
+  Schematic.prototype.setBlock = function (pos, y, z, id, data) {
+    // TODO block entities
+    if (typeof pos === 'object') {
+      pos = pos.clone();
+      id = y;
+      data = z;
+    } else {
+      pos = vec3(pos, y, z);
+    }
+
+    this._setBlock(pos, newBlock(id, data || 0, pos));
+  };
+
+  Schematic.prototype._setBlock = function (pos, block) {
+    ensureArr(this.blocks, pos.x);
+    ensureArr(this.blocks[pos.x], pos.y);
+    this.blocks[pos.x][pos.y][pos.z] = block;
   };
 
   return Schematic;
 };
+
+// NOTE ensureArr() only sets to an array if it used to be falsey
+function ensureArr(base, prop) {
+  if (!base[prop]) base[prop] = [];
+}
