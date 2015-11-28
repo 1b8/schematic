@@ -48,56 +48,56 @@
       - [entity.commandStats.queryResultObjective](#entitycommandstatsqueryresultobjective)
       - [entity.commandStats.queryResultName](#entitycommandstatsqueryresultname)
   - [BlockEntity](#blockentity)
-    - [blockEntity.raw](#blockentityraw)
+    - [block.raw](#blockentityraw)
     - [Container](#container)
-      - [blockEntity.customName](#blockentitycustomname)
-      - [blockEntity.lockKey](#blockentitylockkey)
-      - [blockEntity.items](#blockentityitems)
-      - [blockEntity](#blockentity)
+      - [block.customName](#blockentitycustomname)
+      - [block.lockKey](#blockentitylockkey)
+      - [block.items](#blockentityitems)
+      - [block](#blockentity)
     - [Banner](#banner)
-      - [blockEntity.background](#blockentitybackground)
-      - [blockEntity.patterns](#blockentitypatterns)
+      - [block.background](#blockentitybackground)
+      - [block.patterns](#blockentitypatterns)
     - [Beacon](#beacon)
-      - [blockEntity.lockKey](#blockentitylockkey-1)
-      - [blockEntity.levels](#blockentitylevels)
-      - [blockEntity.powers](#blockentitypowers)
-        - [blockEntity.powers.primary](#blockentitypowersprimary)
-        - [blockEntity.powers.secondary](#blockentitypowerssecondary)
+      - [block.lockKey](#blockentitylockkey-1)
+      - [block.levels](#blockentitylevels)
+      - [block.powers](#blockentitypowers)
+        - [block.powers.primary](#blockentitypowersprimary)
+        - [block.powers.secondary](#blockentitypowerssecondary)
     - [Brewing stand](#brewing-stand)
-      - [blockEntity.brewTime](#blockentitybrewtime)
-      - [blockEntity.fuel](#blockentityfuel)
+      - [block.brewTime](#blockentitybrewtime)
+      - [block.fuel](#blockentityfuel)
     - [Chest](#chest)
-      - [blockEntity.lootTable](#blockentityloottable)
-      - [blockEntity.lootTableSeed](#blockentityloottableseed)
+      - [block.lootTable](#blockentityloottable)
+      - [block.lootTableSeed](#blockentityloottableseed)
     - [Redstone Comparator](#redstone-comparator)
-      - [blockEntity.outputSignal](#blockentityoutputsignal)
+      - [block.outputSignal](#blockentityoutputsignal)
     - [Command Block](#command-block)
-      - [blockEntity.customName](#blockentitycustomname-1)
-      - [blockEntity.lockKey](#blockentitylockkey-2)
-      - [blockEntity.commandStats](#blockentitycommandstats)
-      - [blockEntity.command](#blockentitycommand)
-      - [blockEntity.successCount](#blockentitysuccesscount)
-      - [blockEntity.trackOutput](#blockentitytrackoutput)
-      - [blockEntity.powered](#blockentitypowered)
-      - [blockEntity.auto](#blockentityauto)
+      - [block.customName](#blockentitycustomname-1)
+      - [block.lockKey](#blockentitylockkey-2)
+      - [block.commandStats](#blockentitycommandstats)
+      - [block.command](#blockentitycommand)
+      - [block.successCount](#blockentitysuccesscount)
+      - [block.trackOutput](#blockentitytrackoutput)
+      - [block.powered](#blockentitypowered)
+      - [block.auto](#blockentityauto)
     - [Dropper](#dropper)
     - [Enchantment Table](#enchantment-table)
-      - [blockEntity.customName](#blockentitycustomname-2)
+      - [block.customName](#blockentitycustomname-2)
     - [End Gateway](#end-gateway)
-      - [blockEntity.age](#blockentityage)
-      - [blockEntity.exactTeleport](#blockentityexactteleport)
-      - [blockEntity.exitPortal](#blockentityexitportal)
+      - [block.age](#blockentityage)
+      - [block.exactTeleport](#blockentityexactteleport)
+      - [block.exitPortal](#blockentityexitportal)
     - [Flower Pot](#flower-pot)
-      - [blockEntity.flower](#blockentityflower)
+      - [block.flower](#blockentityflower)
     - [Furnace](#furnace)
-      - [blockEntity.burnTimeLeft](#blockentityburntimeleft)
-      - [blockEntity.cookTime](#blockentitycooktime)
-      - [blockEntity.cookTimeTotal](#blockentitycooktimetotal)
+      - [block.burnTimeLeft](#blockentityburntimeleft)
+      - [block.cookTime](#blockentitycooktime)
+      - [block.cookTimeTotal](#blockentitycooktimetotal)
     - [Hopper](#hopper)
-      - [blockEntity.transferCooldown](#blockentitytransfercooldown)
+      - [block.transferCooldown](#blockentitytransfercooldown)
     - [Note block](#note-block)
-      - [blockEntity.note](#blockentitynote)
-      - [blockEntity.powered](#blockentitypowered-1)
+      - [block.note](#blockentitynote)
+      - [block.powered](#blockentitypowered-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -260,26 +260,26 @@ Extra data about the entity.
 
 Inherits from [prismarine-block](https://github.com/prismarinejs/prismarine-block)
 
-### blockEntity.raw
+### block.raw
+### block.blockEntityType
+You can check if this exists to check if `block` is a block entity or not.
 
 ### Container
 
-#### blockEntity.customName
+#### block.customName
 Custom name of this container. May not exist, or may exist and be empty.
 
-#### blockEntity.lockKey
+#### block.lockKey
 If set, a player must hold an item with this string as its name to open the container.
 
-#### blockEntity.items
+#### block.items
 `Array` of [prismarine-item](https://github.com/prismarinejs/prismarine-item)s,
 EXCEPT `item.nbt` is an `Object` instead of a `Buffer`.
 
-#### blockEntity
-
 ### Banner
 
-#### blockEntity.background
-#### blockEntity.patterns
+#### block.background
+#### block.patterns
 Looks like:
 ```json
 {
@@ -290,80 +290,80 @@ Looks like:
 
 ### Beacon
 
-#### blockEntity.lockKey
-#### blockEntity.levels
+#### block.lockKey
+#### block.levels
 Number of pyramid levels.
 
-#### blockEntity.powers
-##### blockEntity.powers.primary
-##### blockEntity.powers.secondary
+#### block.powers
+##### block.powers.primary
+##### block.powers.secondary
 
 ### Brewing stand
 Container.
-#### blockEntity.brewTime
-#### blockEntity.fuel
+#### block.brewTime
+#### block.fuel
 Added in 1.9.
 
 ### Chest
 Container.
-#### blockEntity.lootTable
+#### block.lootTable
 Added in 1.9.
-#### blockEntity.lootTableSeed
+#### block.lootTableSeed
 Added in 1.9.
 
 ### Redstone Comparator
-#### blockEntity.outputSignal
+#### block.outputSignal
 
 ### Command Block
-#### blockEntity.customName
-#### blockEntity.lockKey
-#### blockEntity.commandStats
+#### block.customName
+#### block.lockKey
+#### block.commandStats
 See [`entity.commandStats`](#entitycommandstats)
-#### blockEntity.command
+#### block.command
 The command the block will execute.
-#### blockEntity.successCount
-#### blockEntity.trackOutput
+#### block.successCount
+#### block.trackOutput
 Boolean.
-#### blockEntity.powered
+#### block.powered
 Added in 1.9.
-#### blockEntity.auto
+#### block.auto
 Added in 1.9.
 
 ### Dropper
 Container.
 
 ### Enchantment Table
-#### blockEntity.customName
+#### block.customName
 
 ### End Gateway
 Added in 1.9.
-#### blockEntity.age
-#### blockEntity.exactTeleport
+#### block.age
+#### block.exactTeleport
 Boolean.
-#### blockEntity.exitPortal
+#### block.exitPortal
 Vec3.
 
 ### Flower Pot
-#### blockEntity.flower
+#### block.flower
 Block.
 
 ### Furnace
 Container.
-#### blockEntity.burnTimeLeft
+#### block.burnTimeLeft
 In ticks.
-#### blockEntity.cookTime
+#### block.cookTime
 Time it's been cooking for, in ticks.
-#### blockEntity.cookTimeTotal
+#### block.cookTimeTotal
 Time it will take to cook, in ticks.
 
 ### Hopper
 Container.
-#### blockEntity.transferCooldown
+#### block.transferCooldown
 
 ### Note block
-#### blockEntity.note
+#### block.note
 Pitch, integer.
-#### blockEntity.powered
+#### block.powered
 Added in 1.9.
 
 TODO: More block entity types.

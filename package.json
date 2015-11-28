@@ -2,7 +2,7 @@
   "name": "mc-schematic",
   "version": "1.0.0",
   "description": "Read MCEdit/WorldEdit schematics",
-  "main": "index.js",
+  "main": "dist/index.js",
   "keywords": [
     "minecraft",
     "nbt",
@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "doctoc": "0.15.0",
+    "gulp": "^3.9.0",
+    "gulp-uglify": "^1.5.1",
     "mocha": "2.3.4"
   }
 }
