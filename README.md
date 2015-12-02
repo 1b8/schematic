@@ -30,6 +30,9 @@ npm install --save mc-schematic
 ### [Example](https://github.com/1b8/schematic/blob/master/doc/examples.js)
 
 ### TODO
-`schem.updateRaw()` + entities
-`schem.write()`
-Write more tests
+* `schem.updateRaw()` + entities
+* more block entities
+* different entity types (mob, breedable...)
+* update width, height, etc. with `setBlock()`
+* `schem.write()`
+* Write more tests
