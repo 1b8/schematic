@@ -69,6 +69,12 @@ describe('schematic', function () {
       pos.translate(2, 3, 0);
       assert.notDeepEqual(pos, b.position);
     });
+    it('updates schem.width, height, & length', function () {
+      schem.setBlock(20, 20, 20, 7);
+      assert.strictEqual(schem.width , 21);
+      assert.strictEqual(schem.height, 21);
+      assert.strictEqual(schem.length, 21);
+    });
 
     function g() {
       return schem.getBlock(pos);
@@ -78,9 +84,7 @@ describe('schematic', function () {
   describe('forEachBlock', function () {
     it('block.position is normally correct', function () {
       schem.forEachBlock(function (block, pos) {
-        var gotBlock = schem.getBlock(pos);
-        if (gotBlock === null) return;
-        assert.strictEqual(block, gotBlock);
+        assert.strictEqual(block, schem.getBlock(pos));
       });
     });
     it('ends when the callback returns true (and starts with 0,0,0)', function () {

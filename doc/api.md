@@ -114,7 +114,11 @@ where `functionName` is a function that takes 1 or 3 arguments, and:
 # Classes
 
 ## Schematic
-`Schematic` is the main class; `require('schematic')(version)` returns this.
+`Schematic` is the main class. To retrieve it, call:
+```js
+var Schematic = require('mc-schematic')(version);
+```
+where `version` is either `"1.8"` or `"1.9"`, and specifies a Minecraft version.
 
 ### Static functions
 
@@ -162,6 +166,7 @@ See [prismarine-block](https://github.com/PrismarineJS/prismarine-block).
 Set the block at (`x`, `y`, `z`) or `pos`. **This does not modify the file!**
 - `id` - block id (1 for stone, etc.)
 - `data` - data value, defaults to `0`.
+This also updates the `width`, `length`, and `height` properties of the schematic.
 
 Example usage to set the block at (`5`, `5`, `5`) to red wool
 (wool is id `35`, red is data value `14`):
@@ -172,13 +177,16 @@ schematic.setBlock(v(5, 5, 5), 35, 14);
 schematic.setBlock(5, 5, 5, 35, 14);
 ```
 
+<!--
 #### schematic.\_setBlock(pos : Vec3, block : Block)
 Used internally by `.setBlock()`. `block` is a
 [prismarine-block](https://github.com/PrismarineJS/prismarine-block).
 Calling this method with a non-prismarine-block
 as `block` may have unexpected consequences. **THE `position` PROPERTY OF
 THE BLOCK WILL REMAIN AS YOU PASS IT, UNLIKE WITH `.setBlock()`, WHICH WILL
-CLONE AND UPDATE THE POSITION.**
+CLONE AND UPDATE THE POSITION. THIS WILL NOT UPDATE THE `length`, `width`, or
+`height` PROPERTIES OF THE SCHEMATIC, EITHER.**
+-->
 
 #### schematic.forEachBlock(callback : function(block : Block, pos : Vec3))
 Loop through every block in the schematic, calling `callback` for each.
