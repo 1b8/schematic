@@ -17,6 +17,7 @@
   "dependencies": {
     "minecraft-data": "^0.14.0",
     "prismarine-block": "^0.1.0",
+    "prismarine-entity": "^0.2.0",
     "prismarine-item": "0.0.0",
     "prismarine-nbt": "0.0.1",
     "vec3": "^0.1.3"

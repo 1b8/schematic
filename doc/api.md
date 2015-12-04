@@ -205,25 +205,18 @@ pos.equals(block.position) === true // (unless you modified block.position...)
 
 ## Entity
 
-### entity.dimension
-`"nether"`, `"overworld"`, or `"end"`.
+[prismarine-entity](https://github.com/PrismarineJS/prismarine-entity), with a
+few additions. Additions are listed here:
 
 ### entity.raw
 Raw data
 
-### entity.id
-The name of the entity, such as `"Zombie"`, or `"EntityHorse"`.
+<!--### entity.id
+The name of the entity, such as `"Zombie"`, or `"EntityHorse"`.-->
 
-### entity.position
-[`Vec3`](https://github.com/andrewrk/node-vec3), the position of the entity.
-
-### entity.velocity
+<!--### entity.velocity
 [`Vec3`](https://github.com/andrewrk/node-vec3), the speed at which the entity
-is moving, in blocks per tick.
-
-### entity.yaw
-
-### entity.pitch
+is moving, in blocks per tick.-->
 
 ### entity.fallDistance
 The amount of distance the entity has fallen, or 0 if the entity is not falling.
@@ -234,9 +227,6 @@ If negative, how many ticks while standing in fire for the entity to start burni
 
 ### entity.air
 The number of ticks while underwater until the entity starts drowning.
-
-### entity.onGround
-Boolean.
 
 ### entity.invulnerable
 Boolean.
