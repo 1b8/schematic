@@ -143,6 +143,13 @@ Size along the y axis.
 #### schematic.length
 Size along the z axis.
 
+#### schematic.we
+Will be present if the schematic was exported with WorldEdit.
+#### schematic.we.offset
+Vec3. The offset of where the player was to the schematic when it was exported.
+#### schematic.we.origin
+Vec3. The original position of the schematic.
+
 #### schematic.entities
 `Array` of entities in the schematic.
 See [Entity](#entity).
