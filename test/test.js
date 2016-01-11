@@ -10,7 +10,7 @@ describe('schematic', function () {
   before(function (done) {
     var num = ~~(Math.random() * 3) + 1;
     console.log('Testing schematic ' + num);
-    fs.readFile(__dirname + '/test' + num + '.schematic', function (err, data) {
+    fs.readFile(__dirname + '/schems/test' + num + '.schematic', function (err, data) {
       if (err) throw err;
 
       Schematic.parse(data, function (err, _schem) {

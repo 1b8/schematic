@@ -3,7 +3,7 @@
 var fs = require('fs');
 var Schematic = require('schematic')('1.8');
 
-fs.readFile('test/test1.schematic', function (err, data) {
+fs.readFile(__dirname = '/test/schems/test1.schematic', function (err, data) {
   if (err) throw err;
 
   Schematic.parse(data, function (err, schem) {

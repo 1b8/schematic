@@ -8,7 +8,7 @@ Read Minecraft MCEdit/WorldEdit schematics.
 var fs = require('fs');
 var Schematic = require('schematic')('1.8');
 
-fs.readFile('test/test1.schematic', function (err, data) {
+fs.readFile(__dirname + '/test/schems/test1.schematic', function (err, data) {
   Schematic.parse(data, function (err, schem) {
     console.log(schem.getBlock(0, 0, 0));
   });
@@ -30,9 +30,7 @@ npm install --save mc-schematic
 ### [Example](https://github.com/1b8/schematic/blob/master/doc/examples.js)
 
 ### TODO
-* `schem.updateRaw()` + entities
+* `entity.updateRaw()`
 * more block entities
 * different entity types (mob, breedable...)
-* update width, height, etc. with `setBlock()`
 * `schem.write()`
-* Write more tests
