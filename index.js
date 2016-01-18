@@ -27,10 +27,14 @@ module.exports = function (version) {
     this.length = this._.Length;
     this.entities = [];
     this.blockEntities = [];
-    for (var i = 0; i < entities.length; i++)
-    this.entities.push(new Entity(entities[i]));
-    for (i = 0; i < blockEntities.length; i++)
-      this.blockEntities.push(new BlockEntity(this, blockEntities[i]));
+    if(entities) {
+      for (var i = 0; i < entities.length; i++)
+        this.entities.push(new Entity(entities[i]));
+    }
+    if(blockEntities) {
+      for (i = 0; i < blockEntities.length; i++)
+        this.blockEntities.push(new BlockEntity(this, blockEntities[i]));
+    }
   }
 
   Schematic.prototype.getBlock = function (x, y, z) {
