@@ -1,9 +1,3 @@
-# Logs
-logs
-*.log
-
-# node-waf configuration
-.lock-wscript
-
 node_modules
 dist
+doc/schematic.json

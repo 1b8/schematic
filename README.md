@@ -6,7 +6,7 @@ Read Minecraft MCEdit/WorldEdit schematics.
 
 ```js
 var fs = require('fs');
-var Schematic = require('schematic')('1.8');
+var Schematic = require('mc-schematic')('1.8');
 
 fs.readFile(__dirname + '/test/schems/test1.schematic', function (err, data) {
   Schematic.parse(data, function (err, schem) {
