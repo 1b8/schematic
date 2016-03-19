@@ -15,9 +15,9 @@
   },
   "repository": "1b8/schematic",
   "dependencies": {
-    "minecraft-data": "^0.14.0",
-    "prismarine-block": "^0.1.0",
-    "prismarine-item": "0.0.0",
+    "minecraft-data": "^1.2.6",
+    "prismarine-block": "^1.0.0",
+    "prismarine-item": "1.0.0",
     "prismarine-nbt": "0.2.0",
     "vec3": "^0.1.3"
   },
