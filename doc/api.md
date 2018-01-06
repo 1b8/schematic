@@ -116,7 +116,7 @@ Read a `Buffer` and execute the callback with these args:
 ### Instance properties
 
 #### schematic.raw
-'raw' schematic object, returned directly from prismarine-nbt.
+'raw' schematic object, returned from prismarine-nbt`.simplify()`.
 
 #### schematic.width
 Size along the x axis.
