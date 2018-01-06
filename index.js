@@ -13,24 +13,28 @@ module.exports = function (version) {
 
     nbt.parse(data, function (err, data) {
       if (err) callback(err);
-      callback(err, new Schematic(data));
+      callback(err, new Schematic(nbt.simplify(data)));
     });
   };
 
   function Schematic(raw) {
-    this._ = raw.value.value;
-    var entities = this._.Entities.value.value;
-    var blockEntities = this._.TileEntities.value.value;
+    this._ = raw;
+    var entities = this._.Entities;
+    var blockEntities = this._.TileEntities;
     this.raw = raw;
-    this.width = this._.Width.value;
-    this.height = this._.Height.value;
-    this.length = this._.Length.value;
+    this.width = this._.Width;
+    this.height = this._.Height;
+    this.length = this._.Length;
     this.entities = [];
     this.blockEntities = [];
-    for (var i = 0; i < entities.length; i++)
-    this.entities.push(new Entity(entities[i]));
-    for (i = 0; i < blockEntities.length; i++)
-      this.blockEntities.push(new BlockEntity(this, blockEntities[i]));
+    if(entities) {
+      for (var i = 0; i < entities.length; i++)
+        this.entities.push(new Entity(entities[i]));
+    }
+    if(blockEntities) {
+      for (i = 0; i < blockEntities.length; i++)
+        this.blockEntities.push(new BlockEntity(this, blockEntities[i]));
+    }
   }
 
   Schematic.prototype.getBlock = function (x, y, z) {
@@ -50,7 +54,7 @@ module.exports = function (version) {
   // Returns the arguments to pass into new Block
   Schematic.prototype._blockArgs = function (pos) {
     var index = (pos.y * this.length + pos.z) * this.width + pos.x;
-    return [this._.Blocks.value[index], this._.Data.value[index], pos];
+    return [this._.Blocks[index]&0xff, this._.Data[index], pos];
   };
 
   return Schematic;
